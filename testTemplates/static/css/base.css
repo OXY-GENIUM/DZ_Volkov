@@ -3,29 +3,111 @@
     grid-template-areas:
         'header header'
         'sidebar content';
-    gap: 10px;
-    grid-template-columns: 150px 1fr;
-    grid-template-rows: 50px 1fr;
+    gap: 0px;  /* Уменьшил gap, чтобы избежать лишних пробелов */
+    grid-template-columns: 170px 1fr;
+    grid-template-rows: 70px 1fr;
+}
+
+.item {
+    background-color: #f0f0f0;
+    padding: 5px;
 }
 
 .header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    svg {
+    padding-left: 50px;  /* Отступ слева для текста */
+        margin: 5px;
+    }
+    h1, h2, h3 {
+            color: #333;
+            padding-left: 15px;  /* Отступ слева для текста */
+            margin: 9px;
+            font-family: Raleway;
+            font-size: 33.696px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+
     grid-area: header;
-    background-color: #f4f4f4;
     padding: 10px;
+    background: #FFF;
 }
 
 .sidebar {
     grid-area: sidebar;
-    background-color: #eaeaea;
+    background-color: #7C4EE4;
     padding: 10px;
+
+    a {
+        padding: 10px;
+        text-decoration: none;
+        color: #FFF;
+        text-align: center;
+        font-family: Raleway;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 150%;
+    }
+
+    a:hover {
+        color: #333333;
+        text-decoration: none;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
 }
 
 .content {
+    background-color: #f0f0f0;
     grid-area: content;
-    padding: 10px;
+    padding: 20px;
+    padding-left: 50px;  /* Отступ слева для текста */
+    padding-right: 50px; /* Отступ справа для текста */
+    padding-top: 10px;   /* Отступ сверху для текста */
+    padding-bottom: 60px; /* Отступ снизу для текста */
 }
 
-.item {
-    border: 1px solid black;
-    padding: 5px;
+.content h1 {
+    color: #333;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 63.984px;
+
+}
+.content h2, .content h3 {
+    color: #333;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 31.992px; /* 133.3% */
+
+}
+.content p, ul, li {
+
+    color: #666;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+}
+img {
+    max-width: 100%; /* Ограничивает ширину изображения */
+    height: auto; /* Сохраняет пропорции изображения */
+    border-radius: 8px; /* Скругляет углы изображения */
+    display: block;        /* Делает изображение блочным элементом */
+      margin-left: auto;     /* Автоматические отступы слева */
+      margin-right: auto;    /* Автоматические отступы справа */
 }

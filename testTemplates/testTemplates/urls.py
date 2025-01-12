@@ -23,4 +23,5 @@ urlpatterns = [
     path('', main_page),
     path('catalog', catalog_page),
     path('about', about_page),
+    path('reviews', reviews_page),
 ]

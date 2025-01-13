@@ -18,13 +18,28 @@ def add_comment_page(request):
     return render(request, "add_comment.html", context=data)
 
 def thanks_page(request):
-    user_name = request.POST['user_name']
-    comment = request.POST['comment']
-    product = Product.objects.get(pk=request.POST['product'])
-    ProductComment.objects.create(user_name=user_name, comment=comment, product=product)
-    title = "Страница благодарностей"
-    data = {"menu": MENU, "title": title,"user_name":user_name}
-    return render(request, "thanks.html", context=data)
+    if request.method == "POST":
+        full_name = request.POST['full_name']
+        email = request.POST['email']
+        comment = request.POST['comment']
+        product = Product.objects.get(pk=request.POST['product'])
+        verified = 'verified' in request.POST  # Проверка, если чекбокс был отмечен
+
+        # Создаем комментарий
+        ProductComment.objects.create(
+            full_name=full_name,
+            email=email,
+            comment=comment,
+            verified=verified,
+            product=product
+        )
+        title = "Страница благодарностей"
+        data = {"menu": MENU, "title": title, "user_name": full_name}  # Переименовываем переменную
+        return render(request, "thanks.html", context=data)
+
+    return render(request, "error.html", {"message": "Некорректный запрос."})
+
+
 
 
 

@@ -8,11 +8,12 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.name} - {self.price}'
 
-
 class ProductComment(models.Model):
-    user_name = models.CharField(max_length=40, blank=False)
-    comment = models.TextField(blank=False)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100, blank=False)  # ФИО
+    email = models.EmailField(max_length=100, blank=False)  # Email
+    comment = models.TextField(blank=False)  # Текст отзыва
+    verified = models.BooleanField(default=False)  # Проверено (чекбокс, по-умолчанию False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  # Связь с продуктом
 
     def __str__(self):
-        return f'{self.user_name} - {self.product.name} - {self.product.price}'
+        return f'{self.full_name} - {self.product.name} - {self.comment[:30]}...'  # Отображение первых 30 символов отзыва

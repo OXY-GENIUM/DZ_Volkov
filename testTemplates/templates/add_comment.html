@@ -2,21 +2,30 @@
 
 {% block content %}
 {% load static %}
-<H2>{{ title }}</h2>
+<h2>{{ title }}</h2>
 
 <form action="{% url 'thanks_page' %}" method="POST">
   {% csrf_token %}
+
   <select name="product">
     {% for p in products %}
-    <option value="{{p.id}}">{{p.name}}</option>
+      <option value="{{ p.id }}">{{ p.name }}</option>
     {% endfor %}
   </select>
-  <label for="user_name"></label>
-  <input name="user_name" id="user_name">
-  <label for="comment"></label>
-  <input name="comment" id="comment">
+
+  <label for="full_name">ФИО:</label>
+  <input type="text" name="full_name" id="full_name" required>
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="comment">Текст отзыва:</label>
+  <textarea name="comment" id="comment" required></textarea>
+
+  <label for="verified">Проверено:</label>
+  <input type="checkbox" name="verified" id="verified">
+
   <button type="submit">Отправить</button>
 </form>
-
 
 {% endblock %}

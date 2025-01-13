@@ -7,25 +7,33 @@
 <form action="{% url 'thanks_page' %}" method="POST">
   {% csrf_token %}
 
-  <select name="product">
-    {% for p in products %}
-      <option value="{{ p.id }}">{{ p.name }}</option>
-    {% endfor %}
-  </select>
+  <!-- Поле для ФИО -->
+    <label for="full_name">ФИО:</label>
+    <input type="text" id="full_name" name="full_name" required><br><br>
 
-  <label for="full_name">ФИО:</label>
-  <input type="text" name="full_name" id="full_name" required>
+    <!-- Поле для Email -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
 
-  <label for="email">Email:</label>
-  <input type="email" name="email" id="email" required>
+    <!-- Поле для комментария -->
+    <label for="comment">Комментарий:</label>
+    <textarea id="comment" name="comment" required></textarea><br><br>
 
-  <label for="comment">Текст отзыва:</label>
-  <textarea name="comment" id="comment" required></textarea>
+    <!-- Выбор товара -->
+    <label for="product">Выберите товар:</label>
+    <select name="product" id="product">
+        {% for product in products %}
+            <option value="{{ product.id }}">{{ product.name }}</option>
+        {% endfor %}
+    </select><br><br>
 
-  <label for="verified">Проверено:</label>
-  <input type="checkbox" name="verified" id="verified">
+    <!-- Чекбокс "Я не робот" -->
+    <label for="verified">Проверено: </label>
+    <input type="checkbox" id="verified" name="verified">
+    <span>Я не робот</span><br><br>
 
-  <button type="submit">Отправить</button>
+    <!-- Кнопка отправки -->
+    <button type="submit">Отправить</button>
 </form>
 
 {% endblock %}

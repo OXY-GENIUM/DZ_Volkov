@@ -17,27 +17,33 @@ def add_comment_page(request):
     data = {"menu": MENU, "title": title, "products": products}
     return render(request, "add_comment.html", context=data)
 
+
 def thanks_page(request):
     if request.method == "POST":
         full_name = request.POST['full_name']
         email = request.POST['email']
         comment = request.POST['comment']
         product = Product.objects.get(pk=request.POST['product'])
-        verified = 'verified' in request.POST  # Проверка, если чекбокс был отмечен
+
+        # Проверяем, был ли отправлен чекбокс
+        verified = 'verified' in request.POST  # Чекбокс будет присутствовать, если он отмечен
 
         # Создаем комментарий
         ProductComment.objects.create(
             full_name=full_name,
             email=email,
             comment=comment,
-            verified=verified,
+            verified=verified,  # Сохраняем значение чекбокса
             product=product
         )
+
         title = "Страница благодарностей"
-        data = {"menu": MENU, "title": title, "user_name": full_name}  # Переименовываем переменную
+        data = {"menu": MENU, "title": title, "user_name": full_name,
+                "verified": verified}  # Передаем также значение verified
         return render(request, "thanks.html", context=data)
 
     return render(request, "error.html", {"message": "Некорректный запрос."})
+
 
 
 
